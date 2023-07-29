@@ -1,4 +1,4 @@
-import http from "http";
+import http from "node:http";
 
 
 const users = [];
@@ -21,10 +21,10 @@ const server = http.createServer((req, res) => {
             email: `usuario${id}@example.com`
         })
 
-        return res.end('Criação de usuario');
+        return res.writeHead(201).end();
     }
 
-    return res.end('Hello, world!');
+    return res.writeHead(404).end();
 });
 
 server.listen(3333, () => {
