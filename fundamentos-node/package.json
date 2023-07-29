@@ -1,0 +1,11 @@
+{
+  "name": "fundamentos-node",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "http": "http localhost:3333"
+  }
+}
