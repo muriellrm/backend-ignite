@@ -15,8 +15,16 @@ export class Database {
 		fs.writeFile(databasePath, JSON.stringify(this.#database));
 	}
 
-	select(tableName) {
-		return this.#database[tableName] ?? [];
+	select(tableName, search) {
+		const data = this.#database[tableName] ?? []
+
+		if (search) {
+			return data.filter(row => Object.entries(search).some(([key, value]) => {
+				return row[key].toLowerCase().includes(value.toLowerCase())
+			}));
+		}
+
+		return data;
 	}
 
 	insert(tableName, data) {
@@ -28,4 +36,27 @@ export class Database {
 		this.#persist();
 		return data;
 	}
+
+	delete(tableName, id) {
+		const rowIndex = this.#database[tableName].findIndex(row => row.id === id);
+
+		if (rowIndex > -1) {
+			this.#database[tableName].splice(rowIndex, 1);
+			this.#persist();
+		}
+
+		return rowIndex > -1 ? 204 : 404;
+
+	}
+
+	update(tableName, id, data) {
+		const rowIndex = this.#database[tableName].findIndex(row => row.id === id);
+
+		if (rowIndex > -1) {
+			this.#database[tableName][rowIndex] = { id, ...data };
+			this.#persist();
+		}
+	}
+
+
 }
