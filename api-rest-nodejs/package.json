@@ -1,0 +1,16 @@
+{
+  "name": "api-rest-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "tsx": "^3.12.7",
+    "typescript": "^5.1.6"
+  },
+  "scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
+  "dependencies": {
+    "fastify": "^4.21.0"
+  }
+}
