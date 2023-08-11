@@ -4,11 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@rocketseat/eslint-config": "^2.1.0",
+    "eslint": "^8.46.0",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6"
   },
   "scripts": {
-    "dev": "tsx watch src/server.ts"
+    "dev": "tsx watch src/server.ts",
+    "lint": "eslint --fix --ext .ts"
   },
   "dependencies": {
     "fastify": "^4.21.0"
