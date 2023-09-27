@@ -1,5 +1,6 @@
 import { IUsersRepository } from '#/repositories/users-repository'
 import { hash } from 'bcryptjs'
+import { EmailAlreadyExistsError } from './errors/email-already-exists-error'
 
 interface IProps {
   name: string
@@ -16,7 +17,7 @@ export class RegisterService {
     const existsUser = await this.usersRepository.findByEmail(email)
 
     if (existsUser) {
-      throw new Error(`Email already exists.`)
+      throw new EmailAlreadyExistsError()
     }
 
     await this.usersRepository.create({ email, name, password_hash })
