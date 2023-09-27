@@ -1,5 +1,4 @@
-import { prisma } from '#/lib/prisma'
-import { PrismaUsersRepository } from '#/repositories/prisma-users-repository'
+import { IUsersRepository } from '#/repositories/users-repository'
 import { hash } from 'bcryptjs'
 
 interface IProps {
@@ -8,20 +7,18 @@ interface IProps {
   password: string
 }
 
-export const registerService = async ({ email, name, password }: IProps) => {
-  const password_hash = await hash(password, 6)
+export class RegisterService {
+  constructor(private usersRepository: IUsersRepository) {}
 
-  const existsUser = await prisma.user.findUnique({
-    where: {
-      email,
-    },
-  })
+  async execute({ email, name, password }: IProps) {
+    const password_hash = await hash(password, 6)
 
-  if (existsUser) {
-    throw new Error(`Email already exists.`)
+    const existsUser = await this.usersRepository.findByEmail(email)
+
+    if (existsUser) {
+      throw new Error(`Email already exists.`)
+    }
+
+    await this.usersRepository.create({ email, name, password_hash })
   }
-
-  const prismaUsersRepository = new PrismaUsersRepository()
-
-  await prismaUsersRepository.create({ email, name, password_hash })
 }
