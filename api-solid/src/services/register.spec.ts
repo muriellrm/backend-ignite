@@ -1,17 +1,22 @@
 import { compare } from 'bcryptjs'
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 import { FakeUserRepository } from '#/repositories/fakes/fake-users-repositories'
 
 import { RegisterService } from './register'
 import { EmailAlreadyExistsError } from './errors/email-already-exists-error'
 
-describe('Register Service', () => {
-  it('should hash user password upon registration', async () => {
-    const usersRepository = new FakeUserRepository()
-    const registerService = new RegisterService(usersRepository)
+let usersRepository: FakeUserRepository
+let sut: RegisterService
 
-    const { user } = await registerService.execute({
+describe('Register Service', () => {
+  beforeEach(() => {
+    usersRepository = new FakeUserRepository()
+    sut = new RegisterService(usersRepository)
+  })
+
+  it('should hash user password upon registration', async () => {
+    const { user } = await sut.execute({
       email: 'james@prisma.com',
       password: '123456',
       name: 'James',
@@ -23,27 +28,21 @@ describe('Register Service', () => {
   })
 
   it('should not be able to register with same email twice', async () => {
-    const usersRepository = new FakeUserRepository()
-    const registerService = new RegisterService(usersRepository)
-
     const user = {
       email: 'james@prisma.com',
       password: '123456',
       name: 'James',
     }
 
-    await registerService.execute(user)
+    await sut.execute(user)
 
-    await expect(() => registerService.execute(user)).rejects.toBeInstanceOf(
+    await expect(() => sut.execute(user)).rejects.toBeInstanceOf(
       EmailAlreadyExistsError,
     )
   })
 
   it('should be able to register', async () => {
-    const usersRepository = new FakeUserRepository()
-    const registerService = new RegisterService(usersRepository)
-
-    const { user } = await registerService.execute({
+    const { user } = await sut.execute({
       email: 'james@prisma.com',
       password: '123456',
       name: 'James',
