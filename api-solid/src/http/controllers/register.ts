@@ -1,8 +1,7 @@
-import { z } from 'zod'
-import { FastifyReply, FastifyRequest } from 'fastify'
-import { RegisterService } from '#/services/register'
-import { PrismaUsersRepository } from '#/repositories/prisma/prisma-users-repository'
 import { EmailAlreadyExistsError } from '#/services/errors/email-already-exists-error'
+import { makeRegisterService } from '#/services/factories/make-register-service'
+import { FastifyReply, FastifyRequest } from 'fastify'
+import { z } from 'zod'
 
 export const register = async (
   request: FastifyRequest,
@@ -17,9 +16,7 @@ export const register = async (
   const data = registerBodySchemaZ.parse(request.body)
 
   try {
-    const usersRepository = new PrismaUsersRepository()
-    const registerService = new RegisterService(usersRepository)
-
+    const registerService = makeRegisterService()
     await registerService.execute(data)
   } catch (err) {
     if (err instanceof EmailAlreadyExistsError)
