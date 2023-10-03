@@ -5,8 +5,8 @@ Gym pass app.
 ## RF (Requisitos Funcionais)
 
 - [X] Deve ser possivel se cadastrar;
-- [ ] Deve ser possivel se autenticar;
-- [ ] Deve ser possivel obter o perfil de um usuario logado;
+- [X] Deve ser possivel se autenticar;
+- [X] Deve ser possivel obter o perfil de um usuario logado;
 - [ ] Deve ser possivel obter o numero de check-ins realizados pelo usuario logado;
 - [ ] Deve ser possivel o usuario obter o histórico de check-ins;
 - [ ] Deve ser possivel o usuario buscar academias proximas;
