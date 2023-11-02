@@ -18,7 +18,7 @@ Gym pass app.
 ## RN (Regras de Negócios)
 
 - [X] O usuario não deve poder se cadastra com um e-mail duplicado;
-- [ ] O usuario não deve poder dois check-ins no mesmo dia;
+- [X] O usuario não deve poder dois check-ins no mesmo dia;
 - [ ] O usuario não pode fazer checkin-se nao estimar perto (100m) da academia;
 - [ ] O check-in deve ser validado até 20 minutos após criado;
 - [ ] O check-in só pode ser validado por administradores;
