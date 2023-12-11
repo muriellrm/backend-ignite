@@ -6,23 +6,25 @@ import { CheckInService } from './check-in'
 import { FakeCheckInRepository } from '#/repositories/fakes/fake-check-ins-repositories'
 import { FakeGymRepository } from '#/repositories/fakes/fake-gyms-repositories'
 import { Decimal } from '@prisma/client/runtime/library'
+import { MaxNumberOfCheckInsError } from './errors/max-number-of-check-ins-error'
+import { MaxDistanceError } from './errors/max-distance-error'
 
 let checkInsRepository: FakeCheckInRepository
 let gymsRepository: FakeGymRepository
 let sut: CheckInService
 
 describe('Check In Service', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     checkInsRepository = new FakeCheckInRepository()
     gymsRepository = new FakeGymRepository()
     sut = new CheckInService(checkInsRepository, gymsRepository)
 
-    gymsRepository.items.push({
+    await gymsRepository.create({
       id: 'gym-01',
       description: 'Typescript check',
       title: 'Node Gym',
-      latitude: new Decimal(0),
-      longitude: new Decimal(0),
+      latitude: 0,
+      longitude: 0,
       phone: '4812345678',
     })
 
@@ -61,7 +63,7 @@ describe('Check In Service', () => {
         userLatitude: 0,
         userLongitude: 0,
       }),
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(MaxNumberOfCheckInsError)
   })
 
   it('should be able to check in different days', async () => {
@@ -103,6 +105,6 @@ describe('Check In Service', () => {
         userLatitude: -28.7478485,
         userLongitude: -49.4889183,
       }),
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(MaxDistanceError)
   })
 })
