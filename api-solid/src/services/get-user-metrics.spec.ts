@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { FakeCheckInRepository } from '#/repositories/fakes/fake-check-ins-repositories'
-import { FetchUserCheckInHistoryService } from './fetch-user-check-ins-history'
 import { GetUserMetricsService } from './get-user-metrics'
 
 let checkInsRepository: FakeCheckInRepository
