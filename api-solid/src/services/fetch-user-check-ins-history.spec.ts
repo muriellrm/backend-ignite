@@ -7,7 +7,7 @@ let checkInsRepository: FakeCheckInRepository
 
 let sut: FetchUserCheckInHistoryService
 
-describe('Fetch user check in history In Service', () => {
+describe('Fetch User Check In History Service', () => {
   beforeEach(async () => {
     checkInsRepository = new FakeCheckInRepository()
     sut = new FetchUserCheckInHistoryService(checkInsRepository)
