@@ -6,7 +6,7 @@ export class FakeGymRepository implements IGymsRepository {
   public items: Gym[] = []
 
   async findById(id: string) {
-    return this.items.find((user) => user.id === id) ?? null
+    return this.items.find((item) => item.id === id) ?? null
   }
 
   async create(data: Prisma.GymCreateInput) {
@@ -23,5 +23,11 @@ export class FakeGymRepository implements IGymsRepository {
     this.items.push(gym)
 
     return gym
+  }
+
+  async findAll(query: string, page: number) {
+    return this.items
+      .filter((item) => item.title.includes(query))
+      .slice((page - 1) * 20, page * 20)
   }
 }

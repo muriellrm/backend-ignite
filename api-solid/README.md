@@ -10,7 +10,7 @@ Gym pass app.
 - [X] Deve ser possivel obter o numero de check-ins realizados pelo usuario logado;
 - [X] Deve ser possivel o usuario obter o histórico de check-ins;
 - [ ] Deve ser possivel o usuario buscar academias proximas;
-- [ ] Deve ser possivel o usuario buscar academias pelo nome;
+- [X] Deve ser possivel o usuario buscar academias pelo nome;
 - [X] Deve ser possivel o usuario realizar check-in em uma academia;
 - [ ] Deve ser possivel validar o check-in de um usuario;
 - [X] Deve ser possivel cadastrar uma academia;
@@ -28,5 +28,5 @@ Gym pass app.
 
 - [X] A senha do usuario precisa estar criptografada;
 - [X] Os dados da aplicação precisam estar persistidos em PostgreSQL;
-- [ ] Todas as listas de dados precisam estar paginadas com 20 itens por pagina;
+- [X] Todas as listas de dados precisam estar paginadas com 20 itens por pagina;
 - [ ] O Usuario deve ser identificado por um JWT (Json Web Token);
