@@ -12,15 +12,15 @@ Gym pass app.
 - [X] Deve ser possivel o usuario buscar academias proximas;
 - [X] Deve ser possivel o usuario buscar academias pelo nome;
 - [X] Deve ser possivel o usuario realizar check-in em uma academia;
-- [ ] Deve ser possivel validar o check-in de um usuario;
+- [X] Deve ser possivel validar o check-in de um usuario;
 - [X] Deve ser possivel cadastrar uma academia;
 
 ## RN (Regras de Negócios)
 
 - [X] O usuario não deve poder se cadastra com um e-mail duplicado;
 - [X] O usuario não deve poder dois check-ins no mesmo dia;
-- [ ] O usuario não pode fazer checkin-se nao estimar perto (100m) da academia;
-- [ ] O check-in deve ser validado até 20 minutos após criado;
+- [X] O usuario não pode fazer checkin-se nao estimar perto (100m) da academia;
+- [X] O check-in deve ser validado até 20 minutos após criado;
 - [ ] O check-in só pode ser validado por administradores;
 - [ ] A academia só pode ser cadastrada por administradores;
 
