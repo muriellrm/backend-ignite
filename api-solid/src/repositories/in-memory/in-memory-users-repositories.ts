@@ -2,7 +2,7 @@ import { Prisma, User } from '@prisma/client'
 import { randomUUID } from 'node:crypto'
 import { IUsersRepository } from '../users-repository'
 
-export class FakeUserRepository implements IUsersRepository {
+export class InMemoryUserRepository implements IUsersRepository {
   public items: User[] = []
 
   async create(data: Prisma.UserCreateInput) {

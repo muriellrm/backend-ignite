@@ -1,18 +1,18 @@
 import { compare } from 'bcryptjs'
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import { FakeUserRepository } from '#/repositories/fakes/fake-users-repositories'
+import { InMemoryUserRepository } from '#/repositories/in-memory/in-memory-users-repositories'
 
-import { RegisterService } from './register'
+import { RegisterUseCase } from './register'
 import { EmailAlreadyExistsError } from './errors/email-already-exists-error'
 
-let usersRepository: FakeUserRepository
-let sut: RegisterService
+let usersRepository: InMemoryUserRepository
+let sut: RegisterUseCase
 
-describe('Register Service', () => {
+describe('Register UseCase', () => {
   beforeEach(() => {
-    usersRepository = new FakeUserRepository()
-    sut = new RegisterService(usersRepository)
+    usersRepository = new InMemoryUserRepository()
+    sut = new RegisterUseCase(usersRepository)
   })
 
   it('should hash user password upon registration', async () => {

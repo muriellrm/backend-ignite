@@ -1,18 +1,18 @@
 import { hash } from 'bcryptjs'
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import { FakeUserRepository } from '#/repositories/fakes/fake-users-repositories'
+import { InMemoryUserRepository } from '#/repositories/in-memory/in-memory-users-repositories'
 
-import { AuthenticateService } from './authenticate'
+import { AuthenticateUseCase } from './authenticate'
 import { InvalidCredentialsError } from './errors/invalid-credentials-error'
 
-let usersRepository: FakeUserRepository
-let sut: AuthenticateService
+let usersRepository: InMemoryUserRepository
+let sut: AuthenticateUseCase
 
-describe('Autenthicate Service', () => {
+describe('Autenthicate UseCase', () => {
   beforeEach(() => {
-    usersRepository = new FakeUserRepository()
-    sut = new AuthenticateService(usersRepository)
+    usersRepository = new InMemoryUserRepository()
+    sut = new AuthenticateUseCase(usersRepository)
   })
 
   it('should be able to autenthicate ', async () => {

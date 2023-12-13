@@ -1,23 +1,23 @@
 import { beforeEach, describe, expect, it, vi, afterEach } from 'vitest'
 import { randomUUID } from 'node:crypto'
 
-import { CheckInService } from './check-in'
+import { CheckInUseCase } from './check-in'
 
-import { FakeCheckInRepository } from '#/repositories/fakes/fake-check-ins-repositories'
-import { FakeGymRepository } from '#/repositories/fakes/fake-gyms-repositories'
+import { InMemoryCheckInRepository } from '#/repositories/in-memory/in-memory-check-ins-repositories'
+import { InMemoryGymRepository } from '#/repositories/in-memory/in-memory-gyms-repositories'
 import { Decimal } from '@prisma/client/runtime/library'
 import { MaxNumberOfCheckInsError } from './errors/max-number-of-check-ins-error'
 import { MaxDistanceError } from './errors/max-distance-error'
 
-let checkInsRepository: FakeCheckInRepository
-let gymsRepository: FakeGymRepository
-let sut: CheckInService
+let checkInsRepository: InMemoryCheckInRepository
+let gymsRepository: InMemoryGymRepository
+let sut: CheckInUseCase
 
-describe('Check In Service', () => {
+describe('Check In UseCase', () => {
   beforeEach(async () => {
-    checkInsRepository = new FakeCheckInRepository()
-    gymsRepository = new FakeGymRepository()
-    sut = new CheckInService(checkInsRepository, gymsRepository)
+    checkInsRepository = new InMemoryCheckInRepository()
+    gymsRepository = new InMemoryGymRepository()
+    sut = new CheckInUseCase(checkInsRepository, gymsRepository)
 
     await gymsRepository.create({
       id: 'gym-01',

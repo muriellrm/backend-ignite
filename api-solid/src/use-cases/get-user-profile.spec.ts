@@ -1,18 +1,18 @@
 import { hash } from 'bcryptjs'
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import { FakeUserRepository } from '#/repositories/fakes/fake-users-repositories'
+import { InMemoryUserRepository } from '#/repositories/in-memory/in-memory-users-repositories'
 
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
-import { GetUserProfileService } from './get-user-profile'
+import { GetUserProfileUseCase } from './get-user-profile'
 
-let usersRepository: FakeUserRepository
-let sut: GetUserProfileService
+let usersRepository: InMemoryUserRepository
+let sut: GetUserProfileUseCase
 
-describe('Get User Profile Service', () => {
+describe('Get User Profile UseCase', () => {
   beforeEach(() => {
-    usersRepository = new FakeUserRepository()
-    sut = new GetUserProfileService(usersRepository)
+    usersRepository = new InMemoryUserRepository()
+    sut = new GetUserProfileUseCase(usersRepository)
   })
 
   it('should be able to get user profile', async () => {

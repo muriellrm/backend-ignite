@@ -3,7 +3,7 @@ import { randomUUID } from 'node:crypto'
 import { ICheckInsRepository } from '../check-ins-repository'
 import dayjs from 'dayjs'
 
-export class FakeCheckInRepository implements ICheckInsRepository {
+export class InMemoryCheckInRepository implements ICheckInsRepository {
   public items: CheckIn[] = []
 
   async create(data: Prisma.CheckInUncheckedCreateInput) {

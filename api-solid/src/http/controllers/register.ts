@@ -1,5 +1,5 @@
-import { EmailAlreadyExistsError } from '#/services/errors/email-already-exists-error'
-import { makeRegisterService } from '#/services/factories/make-register-service'
+import { EmailAlreadyExistsError } from '#/use-cases/errors/email-already-exists-error'
+import { makeRegisterUseCase } from '#/use-cases/factories/make-register-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -16,8 +16,8 @@ export const register = async (
   const data = registerBodySchemaZ.parse(request.body)
 
   try {
-    const registerService = makeRegisterService()
-    await registerService.execute(data)
+    const registerUseCase = makeRegisterUseCase()
+    await registerUseCase.execute(data)
   } catch (err) {
     if (err instanceof EmailAlreadyExistsError)
       return reply.status(409).send({ message: err.message })

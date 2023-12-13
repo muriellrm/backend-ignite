@@ -1,15 +1,15 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import { FakeGymRepository } from '#/repositories/fakes/fake-gyms-repositories'
-import { CreateGymService } from './create-gym'
+import { InMemoryGymRepository } from '#/repositories/in-memory/in-memory-gyms-repositories'
+import { CreateGymUseCase } from './create-gym'
 
-let gymsRepository: FakeGymRepository
-let sut: CreateGymService
+let gymsRepository: InMemoryGymRepository
+let sut: CreateGymUseCase
 
-describe('Create Gym Service', () => {
+describe('Create Gym UseCase', () => {
   beforeEach(() => {
-    gymsRepository = new FakeGymRepository()
-    sut = new CreateGymService(gymsRepository)
+    gymsRepository = new InMemoryGymRepository()
+    sut = new CreateGymUseCase(gymsRepository)
   })
 
   it('should be able to create gym', async () => {

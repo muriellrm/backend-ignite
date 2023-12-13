@@ -1,17 +1,17 @@
 import { ICheckInsRepository } from '#/repositories/check-ins-repository'
 
-interface IServiceRequest {
+interface IUseCaseRequest {
   userId: string
 }
 
-interface IServiceResponse {
+interface IUseCaseResponse {
   checkInsCount: number
 }
 
-export class GetUserMetricsService {
+export class GetUserMetricsUseCase {
   constructor(private checkInsRepository: ICheckInsRepository) {}
 
-  async execute({ userId }: IServiceRequest): Promise<IServiceResponse> {
+  async execute({ userId }: IUseCaseRequest): Promise<IUseCaseResponse> {
     const checkInsCount = await this.checkInsRepository.countByUserId(userId)
 
     return { checkInsCount }

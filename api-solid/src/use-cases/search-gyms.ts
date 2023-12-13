@@ -1,19 +1,19 @@
 import { IGymsRepository } from '#/repositories/gyms-repository'
 import { Gym } from '@prisma/client'
 
-interface IServiceRequest {
+interface IUseCaseRequest {
   query: string
   page: number
 }
 
-interface IServiceResponse {
+interface IUseCaseResponse {
   gyms: Gym[]
 }
 
-export class SearchGymsService {
+export class SearchGymsUseCase {
   constructor(private gymsRepository: IGymsRepository) {}
 
-  async execute({ query, page }: IServiceRequest): Promise<IServiceResponse> {
+  async execute({ query, page }: IUseCaseRequest): Promise<IUseCaseResponse> {
     const gyms = await this.gymsRepository.findAll(query, page)
 
     return {
